@@ -39,11 +39,17 @@ class MainActivity : AppCompatActivity() {
 
         setupBoard()
 
+        // Animate the reset button on click with a 3D Y-axis flip
         resetButton.setOnClickListener {
-            resetBoard()
+            animateButton3DRotate(resetButton) {
+                resetBoard()
+            }
         }
+        // Animate the new game button on click with a 3D Y-axis flip
         newGameButton.setOnClickListener {
-            newGame()
+            animateButton3DRotate(newGameButton) {
+                newGame()
+            }
         }
 
         modeRadioGroup.setOnCheckedChangeListener { _, checkedId ->
@@ -73,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                 cell.isEnabled = gameActive
 
                 cell.setOnClickListener {
-                    if (cell.text == "" && gameActive) {
+                    if (cell.text.isNullOrEmpty() && gameActive) {
                         cell.text = currentPlayer
                         cell.setTextColor(
                             ContextCompat.getColor(this,
@@ -201,5 +207,32 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    // PUBLIC_INTERFACE
+    /**
+     * Applies a 3D Y-axis rotation animation (flip effect) to the provided button.
+     * After animation finishes, triggers the provided action (e.g., resetBoard or newGame).
+     * Button is briefly disabled during animation for smoothness.
+     *
+     * @param button The button to animate.
+     * @param onAnimationEnd Lambda to run after the animation ends.
+     */
+    private fun animateButton3DRotate(button: Button, onAnimationEnd: () -> Unit) {
+        button.isEnabled = false
+        // Animate first 90° rotation (hide), then action, then 90° back (show)
+        button.animate()
+            .rotationY(90f)
+            .setDuration(160)
+            .withEndAction {
+                onAnimationEnd()
+                button.rotationY = -90f
+                button.animate()
+                    .rotationY(0f)
+                    .setDuration(160)
+                    .withEndAction { button.isEnabled = true }
+                    .start()
+            }
+            .start()
     }
 }
