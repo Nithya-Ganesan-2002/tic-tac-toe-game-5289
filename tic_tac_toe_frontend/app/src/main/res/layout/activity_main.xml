@@ -72,7 +72,7 @@
         app:alignmentMode="alignMargins"
         app:rowCount="3"
         app:columnCount="3"
-        android:useDefaultMargins="true"
+        app:useDefaultMargins="true"
         app:layout_constraintTop_toBottomOf="@id/modeRadioGroup"
         app:layout_constraintBottom_toTopOf="@id/controlsLayout"
         app:layout_constraintLeft_toLeftOf="parent"
