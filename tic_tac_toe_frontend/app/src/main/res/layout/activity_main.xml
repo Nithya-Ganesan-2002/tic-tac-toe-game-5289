@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!-- Player turn indicator -->
+    <TextView
+        android:id="@+id/playerTurnText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Player X's turn"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:textColor="@color/primary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="32dp"/>
+
+    <!-- Game result display -->
+    <TextView
+        android:id="@+id/gameResultText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="19sp"
+        android:textStyle="bold"
+        android:textColor="@color/accent"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/playerTurnText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Mode Switch -->
+    <RadioGroup
+        android:id="@+id/modeRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/gameResultText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="18dp">
+
+        <RadioButton
+            android:id="@+id/twoPlayerRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Two Player"
+            android:checked="true"
+            android:textColor="@color/secondary"/>
+
+        <RadioButton
+            android:id="@+id/aiRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vs Computer"
+            android:textColor="@color/secondary"/>
+    </RadioGroup>
+
+    <!-- Game Board 3x3 Grid -->
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/gameGrid"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/grid_bg"
+        app:alignmentMode="alignMargins"
+        app:rowCount="3"
+        app:columnCount="3"
+        android:useDefaultMargins="true"
+        app:layout_constraintTop_toBottomOf="@id/modeRadioGroup"
+        app:layout_constraintBottom_toTopOf="@id/controlsLayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHeight_percent="0.46"
+        app:layout_constraintWidth_percent="0.95"/>
+
+    <!-- Controls (Reset, New Game) -->
+    <LinearLayout
+        android:id="@+id/controlsLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="34dp"
+        app:layout_constraintWidth_percent="0.85">
+
+        <Button
+            android:id="@+id/resetButton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:text="Reset"
+            android:layout_weight="1"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/secondary"
+            android:textColor="@color/white"
+            android:layout_marginEnd="14dp"/>
+
+        <Button
+            android:id="@+id/newGameButton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:text="New Game"
+            android:layout_weight="1"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/accent"
+            android:textColor="@color/black"
+            android:layout_marginStart="14dp"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
